@@ -98,6 +98,8 @@ def check_fleet_edges(ai_settings,aliens):
             change_fleet_direction(ai_settings,aliens)
             break
 
-def update_aliens(ai_settings,aliens):
+def update_aliens(ai_settings,ship,aliens):
     check_fleet_edges(ai_settings,aliens)
     aliens.update()
+    if pygame.sprite.spritecollideany(ship,aliens):
+        print("Ship Hit")
