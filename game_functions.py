@@ -2,7 +2,7 @@ import sys
 import pygame
 from bullet import Bullet
 from alien import Alien
-
+from time import sleep
 
 def get_number_aliens_x(ai_settings,alien_width):
     available_space_x = ai_settings.screen_width - 2 * alien_width#2*160 to leave space for two alien at the end
@@ -98,8 +98,18 @@ def check_fleet_edges(ai_settings,aliens):
             change_fleet_direction(ai_settings,aliens)
             break
 
-def update_aliens(ai_settings,ship,aliens):
+def update_aliens(ai_settings,stats,screen,ship,aliens,bullets):
     check_fleet_edges(ai_settings,aliens)
     aliens.update()
     if pygame.sprite.spritecollideany(ship,aliens):
-        print("Ship Hit")
+        ship_hit(ai_settings,stats,screen,ship,aliens,bullets)
+        
+def ship_hit(ai_settings,stats,screen,ship,aliens,bullets):
+    stats.ships_left -= 1
+    aliens.empty()
+    bullets.empty()
+
+    create_fleet(ai_settings,screen,ship,aliens)
+    ship.center_ship()
+
+    sleep(0.5)
