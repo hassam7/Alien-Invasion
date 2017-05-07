@@ -9,7 +9,7 @@ class Settings():
         self.bullets_allowed = 3
         self.fleet_drop_speed = 10
         self.ship_limit = 3        
-        self.speed_scale = 1.1
+        self.speedup_scale = 1.1
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
@@ -18,4 +18,5 @@ class Settings():
         self.alien_speed_factor = 1
         self.fleet_direction = 1
 
-    
+    def increase_speed(self):
+        self.ship_speed_factor *= self.speedup_scale
