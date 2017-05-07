@@ -54,6 +54,7 @@ def check_bullet_alien_collisions(ai_settings,screen,stats,sb,ship,aliens,bullet
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
+        check_high_score(stats, sb)
     if len(aliens) == 0:
         bullets.empty()
         ai_settings.increase_speed()
@@ -146,3 +147,7 @@ def check_aliens_bottom(ai_settings,stats,screen,ship,aliens,bullets):
         if alien.rect.bottom >= screen_rect.bottom:
             ship_hit(ai_settings,stats,screen,ship,aliens,bullets)
             break
+def check_high_score(stats, sb):
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prep_high_score()
